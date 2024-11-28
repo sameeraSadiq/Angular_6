@@ -1,0 +1,64 @@
+<!-- register.component.html -->
+<div class="container">
+  <h2>Registration Form</h2>
+
+  <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.includes('successfully'), 'alert-danger': message.includes('Error')}">
+    {{ message }}
+  </div>
+
+  <div *ngIf="registeredUser">
+    <h4>Registered User:</h4>
+    <p>Username: {{ registeredUser.username }}</p>
+    <p>Email: {{ registeredUser.email }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" class="form-control" required [(ngModel)]="model.firstname" name="firstname" #firstname="ngModel" />
+      <div *ngIf="firstname.invalid && firstname.touched" class="alert alert-danger">First Name is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" class="form-control" required [(ngModel)]="model.lastname" name="lastname" #lastname="ngModel" />
+      <div *ngIf="lastname.invalid && lastname.touched" class="alert alert-danger">Last Name is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" class="form-control" required [(ngModel)]="model.email" name="email" #email="ngModel" />
+      <div *ngIf="email.invalid && email.touched" class="alert alert-danger">Email is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" class="form-control" required [(ngModel)]="model.phone" name="phone" #phone="ngModel" />
+      <div *ngIf="phone.invalid && phone.touched" class="alert alert-danger">Phone is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" class="form-control" required [(ngModel)]="model.date" name="date" #date="ngModel" />
+      <div *ngIf="date.invalid && date.touched" class="alert alert-danger">Date is required</div>
+    </div>
+
+    <div class="form-group">
+      <label>Membership:</label>
+      <div>
+        <label><input type="radio" [(ngModel)]="model.membership" name="membership" value="basic" required /> Basic</label>
+        <label><input type="radio" [(ngModel)]="model.membership" name="membership" value="premium" required /> Premium</label>
+      </div>
+      <div *ngIf="!model.membership && registerForm.touched" class="alert alert-danger">Membership type is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" id="image" class="form-control" (change)="onFileChange($event)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+      Register
+    </button>
+  </form>
+</div>

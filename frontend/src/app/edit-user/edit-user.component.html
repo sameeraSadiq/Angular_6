@@ -1,0 +1,26 @@
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+  <label for="firstname">First Name</label>
+  <input id="firstname" formControlName="firstname" />
+
+  <label for="lastname">Last Name</label>
+  <input id="lastname" formControlName="lastname" />
+
+  <label for="email">Email</label>
+  <input id="email" formControlName="email" />
+
+  <label for="phone">Phone</label>
+  <input id="phone" formControlName="phone" />
+
+  <label for="date">Date</label>
+  <input id="date" formControlName="date" type="date" />
+
+  <label for="membership">Membership</label>
+  <input id="membership" formControlName="membership" />
+
+  <label for="image">Image</label>
+  <input id="image" type="file" (change)="onImageSelected($event)" />
+
+  <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" width="100" />
+
+  <button type="submit">Save Changes</button>
+</form>
